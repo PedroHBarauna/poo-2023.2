@@ -23,11 +23,12 @@ export class App {
         this.users.push(user);
     }
 
-    registerBike(bike: Bike): void{
+    registerBike(bike: Bike): string{
         if(this.findBike(bike.id)){
             throw new Error('Bike already registered');
         }
         this.bikes.push(bike);
+        return bike.id;
     }
 
     removeUser(userEmail: string): void{
