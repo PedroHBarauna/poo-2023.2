@@ -50,14 +50,15 @@ export class App {
             throw new Error('User not found')
         }
 
-        const array = this.rents.filter(bikes => bikeId === bikes.bike.id)
+        const array = this.rents.filter(rent => bikeId === rent.bike.id && !rent.dateReturned)
         
         const newRent = Rent.create(array, bike, user, startDate, endDate)
         this.rents.push(newRent)
     }
 
     returnBike(bikeId: string, userEmail: string): void{
-        const rent = this.rents.find(rent => rent.bike.id === bikeId && rent.user.email === userEmail);
+        const today = new Date()
+        const rent = this.rents.find(rent => rent.bike.id === bikeId && rent.user.email === userEmail && !rent.dateReturned && rent.dateFrom < today);
         if(!rent){
             throw new Error('Rent not found');
         }
