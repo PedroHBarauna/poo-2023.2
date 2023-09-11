@@ -66,4 +66,19 @@ export class App {
 
         console.log(dataReturned)
     }
+
+    listUsers(): User[]{
+        console.log(this.users);
+        return this.users;
+    }
+
+    listBikes(): Bike[]{
+        console.log(this.bikes);
+        return this.bikes;
+    }
+
+    listRents(): Rent[]{
+        console.log(this.rents);
+        return this.rents;
+    }
 }
