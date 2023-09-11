@@ -33,3 +33,7 @@ console.log('Before return', app.rents);
 app.returnBike(bikeId, 'jose@mail.com');
 
 console.log('After return', app.rents);
+
+app.listUsers();
+app.listBikes();
+app.listRents();
