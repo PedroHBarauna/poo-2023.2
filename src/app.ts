@@ -81,4 +81,13 @@ export class App {
         console.log(this.rents);
         return this.rents;
     }
+
+    updateBikeLocation(bikeId: string, latitude: number, longitude: number): void{
+        const bike = this.findBike(bikeId);
+        if(!bike){
+            throw new Error('Bike not found');
+        }
+        bike.latitude = latitude;
+        bike.longitude = longitude;
+    }
 }
