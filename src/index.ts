@@ -1,6 +1,6 @@
 import { App } from "./app";
 import { Bike } from "./bike";
-import { Rent } from "./rent";
+
 import { User } from "./user";
 
 const app = new App()
@@ -10,7 +10,7 @@ const user1Id = app.addUser(user1);
 const user2Id = app.addUser(user2);
 console.log(app.users);
 
-const bike = new Bike('caloi mountain', 'mountain bike', 123, 200, 100.5, 'My bike', 5, [], "1");
+const bike = new Bike('caloi mountain', 'mountain bike', 123, 200, 100.5, 'My bike', 5, [], "1", -45.79360408864102, -23.16388065178525);
 const bikeId = app.registerBike(bike);
 console.log(app.bikes);
 
