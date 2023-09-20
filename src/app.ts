@@ -12,8 +12,10 @@ export class App {
         return this.users.find(user => { return user.email === email});
     }
 
-    findBike(bikeId: string): Bike | undefined{
-        return this.bikes.find(bike => { return bike.id === bikeId});
+    findBike(bikeId: string): Bike{
+        const bike = this.bikes.find(bike => bike.id === bikeId);
+        if(!bike) throw new Error('Bike not found');
+        return bike;
     }
 
     addUser(user: User): void {
@@ -84,9 +86,6 @@ export class App {
 
     updateBikeLocation(bikeId: string, latitude: number, longitude: number): void{
         const bike = this.findBike(bikeId);
-        if(!bike){
-            throw new Error('Bike not found');
-        }
         bike.latitude = latitude;
         bike.longitude = longitude;
     }
