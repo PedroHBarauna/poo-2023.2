@@ -1,39 +1,24 @@
 import { App } from "./app";
 import { Bike } from "./bike";
-
+import { Location } from "./location";
+import { Rent } from "./rent";
 import { User } from "./user";
+import sinon from 'sinon'
 
-const app = new App()
-const user1 = new User('Jose', 'jose@mail.com', '1234', "1");
-const user2 = new User('Maria', 'maria@mail.com', '1234', "2");
-const user1Id = app.addUser(user1);
-const user2Id = app.addUser(user2);
-console.log(app.users);
+async function main() {
+    const clock = sinon.useFakeTimers();
+    const app = new App()
+    const user1 = new User('Jose', 'jose@mail.com', '1234')
+    await app.registerUser(user1)
+    const bike = new Bike('caloi mountainbike', 'mountain bike',
+        1234, 1234, 100.0, 'My bike', 5, [], true, new Location(0.0, 0.0), '1');
+    app.registerBike(bike)
+    console.log('Bike disponível: ', bike.available)
+    app.rentBike(bike.id, user1.email)
+    console.log('Bike disponível: ', bike.available)
+    clock.tick(1000 * 60 * 65)
+    console.log(app.returnBike(bike.id, user1.email))
+    console.log('Bike disponível: ', bike.available)
+}
 
-const bike = new Bike('caloi mountain', 'mountain bike', 123, 200, 100.5, 'My bike', 5, [], "1", -45.79360408864102, -23.16388065178525);
-const bikeId = app.registerBike(bike);
-console.log(app.bikes);
-
-const today = new Date();
-const yesterday = new Date();
-yesterday.setDate(yesterday.getDate() - 1);
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-const dayAfterTomorrow = new Date();
-dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
-const threeDaysFromToday = new Date();
-threeDaysFromToday.setDate(threeDaysFromToday.getDate() + 3);
-const fourDaysFromToday = new Date();
-fourDaysFromToday.setDate(fourDaysFromToday.getDate() + 4);
-
-app.rentBike(bikeId, 'jose@mail.com', yesterday, today);
-
-console.log('Before return', app.rents);
-
-app.returnBike(bikeId, 'jose@mail.com');
-
-console.log('After return', app.rents);
-
-app.listUsers();
-app.listBikes();
-app.listRents();
+main()

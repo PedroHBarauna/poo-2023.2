@@ -8,5 +8,14 @@
 npm start
 ```
 
+### ou
 
+```
+ts-node ./src/index.ts
+```
 
+### Para rodar os testes execute:
+
+```
+ts-node ./node_modules/jest/bin/jest
+```
