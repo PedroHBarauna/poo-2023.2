@@ -7,6 +7,7 @@ import crypto from 'crypto'
 import { BikeNotFoundError } from "./errors/bike-not-found-error";
 import { UnavailableBikeError } from "./errors/unavailable-bike-error";
 import { UserNotFoundError } from "./errors/user-not-found-error";
+import { RentNotFoundError } from "./errors/rent-not-found-error";
 
 export class App {
     users: User[] = []
@@ -74,7 +75,7 @@ export class App {
             rent.user.email === userEmail &&
             !rent.end
         )
-        if (!rent) throw new Error('Rent not found.')
+        if (!rent) throw new RentNotFoundError()
         rent.end = now
         rent.bike.available = true
         const hours = diffHours(rent.end, rent.start)

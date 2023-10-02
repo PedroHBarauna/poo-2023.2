@@ -1,6 +1,7 @@
 import { App } from "./app";
 import { Bike } from "./bike";
 import { BikeNotFoundError } from "./errors/bike-not-found-error";
+import { RentNotFoundError } from "./errors/rent-not-found-error";
 import { UnavailableBikeError } from "./errors/unavailable-bike-error";
 import { UserNotFoundError } from "./errors/user-not-found-error";
 import { Location } from "./location";
@@ -93,7 +94,7 @@ describe("App", () => {
 
     it("should receive an error if tried to return a bike", () => {
         const app = new App();
-        expect(() => app.returnBike("1", "1")).toThrowError(Error);
+        expect(() => app.returnBike("1", "1")).toThrowError(RentNotFoundError);
     });
 
     it("should return a bike", async () => {
